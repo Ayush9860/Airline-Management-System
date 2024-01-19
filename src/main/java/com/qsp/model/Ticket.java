@@ -1,14 +1,19 @@
-package com.qsp.flight;
+package com.qsp.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Ticket {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ticket_id_gen")
+	@SequenceGenerator(name = "ticket_id_gen", initialValue = 1000, allocationSize = 100)
 	private int ticketId;
 	@OneToOne
 	private Flight flight;

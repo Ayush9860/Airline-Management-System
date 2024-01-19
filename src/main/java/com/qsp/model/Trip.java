@@ -1,22 +1,31 @@
-package com.qsp.flight;
+package com.qsp.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Trip {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trip_id_gen")
+	@SequenceGenerator(name = "trip_id_gen", initialValue = 1000, allocationSize = 100)
 	private int tripId;
 	private String tripFrom;
 	private String tripTo;
 	private LocalDate date;
-	private LocalDateTime startTime;
-	private String endTime;
+	private LocalTime startTime;
+	private LocalTime endTime;
 	private double price;
+	@ManyToOne
+	@JoinColumn
 	private Flight flight;
 
 	public int getTripId() {
@@ -51,19 +60,19 @@ public class Trip {
 		this.date = date;
 	}
 
-	public LocalDateTime getStartTime() {
+	public LocalTime getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(LocalDateTime startTime) {
+	public void setStartTime(LocalTime startTime) {
 		this.startTime = startTime;
 	}
 
-	public String getEndTime() {
+	public LocalTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(String endTime) {
+	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
 
